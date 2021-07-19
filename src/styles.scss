@@ -1,0 +1,41 @@
+
+// @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+
+* {
+    font-family: 'Playfair Display', serif;
+}
+
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50%;
+    text-align: center;
+    text-decoration: none;
+}
+  
+.fa:hover {
+opacity: 0.7;
+}
+
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+
+.fa-github {
+    background: #40515d;
+    color: white;
+}
+
+.sorted {
+    fill: red;
+}
+        
+.testing {
+    fill: red;
+}
+
+.min {
+    fill: red;
+}

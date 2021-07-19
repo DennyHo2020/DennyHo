@@ -1,0 +1,24 @@
+<body>
+  <!-- Bootstrap Navigation -->
+  <nav class= "navbar navbar-expand-md navbar-light bg-light sticky-top" style="z-index: 1;"> 
+    <div class = "container-fluid">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <span class="navbar-brand mb-0 h1">Sorting Algorithms</span>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav pull-start ms-auto"> 
+            <button type="button" class="btn btn-outline-primary btn-sm me-1" id="mergeSortButton" [disabled]="inProgress">Merge Sort</button>
+            <button type="button" class="btn btn-outline-primary btn-sm me-1" id="bubbleSortButton" (click)="bubbleSort()" [disabled]="inProgress">Bubble Sort</button>
+            <button type="button" class="btn btn-outline-primary btn-sm me-1" id = "insertionSortButton" (click)=insertionSort() [disabled]="inProgress">Insertion Sort</button>
+            <button type="button" class="btn btn-outline-primary btn-sm me-1" id="selectionSortButton" (click)="selectionSort()" [disabled]="inProgress">Selection Sort</button>  
+            <button type="button" class="btn btn-outline-primary btn-sm me-1" id = "resetButton" (click)="resetData()" [disabled]="inProgress">Reset</button>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- vis1 is the SVG Canvas that holds the SVG RECTS-->
+  <div id="vis1"></div>
+
+</body>

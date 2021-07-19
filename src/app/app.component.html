@@ -1,0 +1,61 @@
+<!-- Nav Bar  -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Denny Ho</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="resume">CV</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Projects (Interactive)
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <!-- Professional -->
+            <li><h6 class="submenu dropdown-header">Professional</h6></li>
+            <li><a class="dropdown-item" href="https://azmvdnow.gov/home" target="_blank">AZ MVD Now</a></li>
+            <div class="dropdown-divider"></div>
+            <!-- Sorting -->
+            <li><h6 class="submenu dropdown-header">Sorting</h6></li>
+            <li><a class="dropdown-item" routerLink="/projects/sorting">Sorting Algorithms</a></li>
+            <div class="dropdown-divider"></div>
+            <!-- Data Visualizations -->
+            <li><h6 class="submenu dropdown-header">Data Visualizations</h6></li>
+            <li><a class="dropdown-item" href="#">Linked Views</a></li>
+            <li><a class="dropdown-item" href="#">Parallel Coordinates</a></li>
+            <li><a class="dropdown-item" href="#">Calvin Scores Scatterplot</a></li>
+            <li><a class="dropdown-item" href="#">Tree Map</a></li>
+            <li><a class="dropdown-item" href="#">Marching Squares</a></li>
+          </ul>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/">Contact</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/">About Me</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Body -->
+<body>
+  <router-outlet></router-outlet>
+</body>
+
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2021 Copyright: Denny Ho
+  </div>
+</footer>
