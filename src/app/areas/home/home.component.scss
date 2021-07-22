@@ -1,0 +1,37 @@
+.name {
+    &--box {
+        margin-top:2rem;
+        margin-bottom: 2rem;
+        padding-left: 8rem;
+        padding-right: 8rem;
+    }
+
+    &--content {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    &--header {
+        text-align: center;
+        font-size: 3rem;
+    }
+}
+
+.about {
+    // margin-top: 7em;
+    // margin-bottom: 3em;
+    // padding-left: 3em;
+    // padding-right: 3em;
+    display: inline-flex;
+    justify-content: center;
+
+    &--text_box {
+        background-color: rgb(231, 230, 230);
+        margin-left: 2em;
+    }
+
+    &--text {
+        background-color: rgb(231, 230, 230);
+        margin-top: 8em;
+    }
+}

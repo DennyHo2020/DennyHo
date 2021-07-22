@@ -11,13 +11,13 @@ export class SortingComponent implements OnInit {
     public height = 700;
     public width = 700;
 
-    public data: number[] = [];
+    public data: any[] = [];
     public sorted: number[] = [];
     public rects: any;
     public yScale: any;
     public length = 40;
 
-    public reset = false;
+    public reset = true;
     public inProgress: boolean = false;
 
     constructor() { }
@@ -31,8 +31,6 @@ export class SortingComponent implements OnInit {
             }
             this.data.push(val);
         }
-
-        this.reset = false;
 
         // Create rects using d3 join and data array
         d3.select("#vis1").append("svg").attr("width", this.width).attr("height", this.height);
@@ -76,25 +74,29 @@ export class SortingComponent implements OnInit {
         })
         .attr("stroke", "white")
         .attr("stroke-width", .5)
-        .attr("shape-rendering","crispEdges")
+        .attr("shape-rendering","crispEdges");
     }
 
-    public resetData() {
+    public async resetData() {
         this.reset = true; 
         this.data = [];
         this.sorted = [];
+
         // Create array of rectangle length values
         for (let i = 0; i < this.length; i++) {
             var val = Math.floor(Math.random() * this.height + 1);
+
             while (this.data.includes(val)) {
                 val = Math.floor(Math.random() * this.height + 1);
             }
+
             this.data.push(val);
-        }             
+        }            
+
         // Rebind rects to new data and transition to new positions
         this.rects.data(this.data)
             .attr("class", "")                
-            .transition().duration(2000)
+            .transition().duration(250)
             .attr("width", function(val: number) { 
                 return Math.ceil(val);
             })
@@ -102,7 +104,100 @@ export class SortingComponent implements OnInit {
                 return "rect" + d
             })
             .attr("transform", (d:any, i:any) => {return `translate(${0},${this.yScale(i)})`});
-        this.reset = false;
+
+        this.reset = true;
+    }
+
+    public mergeSort() {   
+        this.inProgress = true;                    
+                 
+        var mergeReps = (this.data.length).toString(2).length + 1;
+        var mergeArrays = [[...this.data], []];
+
+        var merge = (iArray: any, nArray: any) => {
+            var newArray = [];
+            // Add values in order to newArray until both arrays have been merged
+            for (var i=0, n=0; i<iArray.length || n<nArray.length;) {
+                if (iArray[i] < nArray[n]) {
+                    newArray.push(iArray[i++]);
+                } 
+                else if (iArray[i] > nArray[n]) {
+                    newArray.push(nArray[n++]);
+                } 
+                else if (!(iArray[i])) {
+                    newArray.push(nArray[n++]);
+                } 
+                else if (!(nArray[n])) {
+                    newArray.push(iArray[i++]);
+                }
+            }
+            return newArray;
+        }
+
+        for (var i = 0; i < this.data.length; i += 2) {
+            mergeArrays[1].push(merge([this.data[i]], [this.data[i+1]]));
+        }
+
+        for (let n = 2; n < mergeReps; n++) {
+            mergeArrays[n] = [];
+            var unMerged = mergeArrays[n-1];
+            for (let k = 0; k < unMerged.length; k += 2) {
+                mergeArrays[n].push(merge(unMerged[k], unMerged[k+1] ? unMerged[k+1] : []));
+            }
+        }
+
+        for (var j = 1; j < mergeArrays.length; j++) {
+            mergeArrays[j] = d3.merge(mergeArrays[j]);
+        }
+
+        var mergeMove = (j: number) => {
+
+            var oldArray = mergeArrays[j];
+            var newArray = [...mergeArrays[j+1]];
+            this.sorted = [];
+
+            var moveStep = (n: number) => {
+
+                d3.selectAll("rect").attr("class", "");
+                d3.select("#rect" + newArray[n]).attr("class", "testing");
+
+                this.sorted.push(newArray[n]);
+                oldArray.shift();
+
+                // Transform rects that have been sorted
+                this.rects.transition().duration(10)
+                    .attr("transform", (d: any) => {
+                        var y;
+                        if (this.sorted.indexOf(d) > -1) {
+                            y = this.sorted.indexOf(d);
+                        }
+                        else {
+                            y = oldArray.indexOf(d) + this.sorted.length;
+                        }
+                        return `translate(${0},${this.yScale(y)})`; 
+                    })
+
+                // Animate swap
+                d3.timeout(() => {
+
+                    if (oldArray.length > 0) {
+                        moveStep(++n);
+                    } 
+                    else if (mergeArrays[j + 2]) {
+                        mergeMove(++j);
+                    } 
+                    else {
+                        this.rects.classed("testing", false);
+                        this.inProgress = false;
+                        this.reset = false;                 
+                    }
+                }, 10);
+            }
+
+            moveStep(0);   
+        }
+
+        mergeMove(0);
     }
 
     public insertionSort() {
@@ -114,11 +209,6 @@ export class SortingComponent implements OnInit {
 
         // sortHelper handles sorting the new value into the sorted list
         var sortHelper = (n: number) => {
-            if (self.reset) {
-                self.reset = false;
-                return;
-            }
-            
             d3.selectAll("rect").attr("class", "")                
             d3.select("#rect" + value).attr("class", "testing")
             
@@ -144,6 +234,7 @@ export class SortingComponent implements OnInit {
                 // Data fully sorted
                 d3.selectAll("rect").attr("class", "");
                 this.inProgress = false;
+                this.reset = false;     
             }
         }
 
@@ -155,6 +246,7 @@ export class SortingComponent implements OnInit {
         // All data has been sorted
         if (!this.data.length) {
             this.inProgress = false;
+            this.reset = false;     
             return;
         }
 
@@ -164,14 +256,10 @@ export class SortingComponent implements OnInit {
     }
 
     private bubbleHelper(i: number) {
-        if (this.reset) {
-            this.reset = false;
-            return;
-        }
-        
         // All data has been sorted
         if (!this.data.length) {
             this.inProgress = false;
+            this.reset = false;     
             return;
         }
         
@@ -271,6 +359,7 @@ export class SortingComponent implements OnInit {
                     }, 10);
 
                     this.inProgress = false;
+                    this.reset = false;     
 
                     return;
                 }                

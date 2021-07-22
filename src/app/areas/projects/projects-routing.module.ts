@@ -8,6 +8,9 @@ const routes: Routes = [
         path: 'sorting', component: SortingComponent
     },
     {
+      path: 'data-visualizations', loadChildren: () => import('./data-visualizations/data-visualizations.module').then(m => m.DataVisualizationsModule)
+    },
+    {
       path: '**', component : HomeComponent
     },
 ];
