@@ -18,10 +18,7 @@
 }
 
 .about {
-    // margin-top: 7em;
-    // margin-bottom: 3em;
-    // padding-left: 3em;
-    // padding-right: 3em;
+    margin-bottom: 3em;
     display: inline-flex;
     justify-content: center;
 
@@ -34,4 +31,12 @@
         background-color: rgb(231, 230, 230);
         margin-top: 8em;
     }
+}
+
+.main--image {
+    width: 100%;
+}
+
+.portrait {
+    max-width: 100%
 }

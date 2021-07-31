@@ -1,12 +1,12 @@
 <body>
   <!-- Bootstrap Navigation -->
-  <nav class= "navbar navbar-expand-md navbar-light bg-light sticky-top" style="z-index: 1;"> 
+  <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top" style="z-index: 1;"> 
     <div class = "container-fluid">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sortingNavBar" aria-controls="sortingNavBar" aria-expanded="false" aria-label="Toggle sorting">
         <span class="navbar-toggler-icon"></span>
       </button>
       <span class="navbar-brand mb-0 h1">Sorting Algorithms</span>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
+      <div class="collapse navbar-collapse" id="sortingNavBar">
         <ul class="navbar-nav pull-start ms-auto"> 
             <button type="button" class="btn btn-outline-primary btn-sm me-1" id="mergeSortButton" (click)="mergeSort()" [disabled]="inProgress || !reset">Merge Sort</button>
             <button type="button" class="btn btn-outline-primary btn-sm me-1" id="bubbleSortButton" (click)="bubbleSort()" [disabled]="inProgress || !reset">Bubble Sort</button>

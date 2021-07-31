@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from '../home/home.component';
+import { ProjectsComponent } from './projects.component';
 import { SortingComponent } from './sorting/sorting.component';
 
 const routes: Routes = [
+    {
+      path: '', component : ProjectsComponent
+    },
     {
         path: 'sorting', component: SortingComponent
     },
@@ -11,7 +14,7 @@ const routes: Routes = [
       path: 'data-visualizations', loadChildren: () => import('./data-visualizations/data-visualizations.module').then(m => m.DataVisualizationsModule)
     },
     {
-      path: '**', component : HomeComponent
+      path: '**', component : ProjectsComponent
     },
 ];
 
