@@ -110,12 +110,12 @@ export class ParallelCoordinates {
             .data(this.dims)
             .enter()
             .append("g")
-            .attr("class", "axis")
+            .attr("class", "axis")            
             .attr("transform", (d: any) => {
-            return `translate(${this.xScale(d)},${0})`
+              return `translate(${this.xScale(d)},${0})`
             })
             .each((d: any, i: any, n: any) => {
-            return d3.select(n[i]).call(this.axes[d]);
+              return d3.select(n[i]).call(this.axes[d]);
             });
         
         // add the axes labels, each with class "label"
@@ -127,9 +127,10 @@ export class ParallelCoordinates {
             .attr("y", this.padding / 2)
             .attr("x", 0)
             .attr("transform", (d: any) => {
-            return `translate(${this.xScale(d)},${0})`
+              return `translate(${this.xScale(d)},${0})`
             })
             .style("text-anchor", "middle")
+            .style("cursor", "pointer")
             .on("click", (d: any) => { this.onClick(d)})
             .text(function(d: any) {
                 return d;
@@ -142,10 +143,10 @@ export class ParallelCoordinates {
             .append("g")
             .attr("class", "brush")
             .attr("transform", (d: any) => {
-            return `translate(${this.xScale(d)},${0})`
+              return `translate(${this.xScale(d)},${0})`
             })
             .each((d: any, i: any, n: any) => {
-                return d3.select(n[i]).call(this.brushes[d]);
+              return d3.select(n[i]).call(this.brushes[d]);
             });
     }
 
@@ -154,7 +155,6 @@ public onClick(d: any) {
     // Swap the labels in dims
     for (let i = 0; i < this.dims.length; i++) {
       if (d == this.dims[i]) {
-        console.log("here");
         if (i != this.dims.length - 1) {
           var temp = this.dims[i];
           this.dims[i] = this.dims[i+1];

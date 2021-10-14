@@ -34,6 +34,10 @@ export class ProjectsComponent implements OnInit {
       window.open(project.codeLink, "_blank");
     }
 
+    public openDemoLink(project: ProjectModel) {
+      this.router.navigateByUrl(project.demoLink);
+    }
+
     public hasLink(project: ProjectModel): boolean {
       if (project.codeLink != "" || project.demoLink != "") {
         return true;

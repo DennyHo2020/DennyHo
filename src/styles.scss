@@ -1,6 +1,7 @@
 
 // @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
 
 .index
 {
@@ -12,10 +13,10 @@
 }
 
 * {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Sora', sans-serif;
 }
 
-.fa {
+.fas, .fab {
     padding: 20px;
     font-size: 30px;
     width: 50%;
@@ -23,8 +24,15 @@
     text-decoration: none;
 }
   
-.fa:hover {
-opacity: 0.7;
+.fas:hover:not(.fa--techstack), .fab:hover:not(.fa--techstack) {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.fa--techstack  {
+    font-size: 1em;
+    width: 0;
+    cursor: default;
 }
 
 .fa-linkedin {

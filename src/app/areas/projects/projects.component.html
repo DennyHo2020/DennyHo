@@ -1,33 +1,23 @@
 <div class="overall">
     <h2 class="header">Projects</h2>
-    <!-- <p class="subheader">Click on images for demo/code. Professional projects have private code.</p> -->
     <div class="row"> 
         <div class="project container">
-            <ng-template ngFor let-item [ngForOf]="projects" let-i="index" >
-
-                <div class="item" *ngIf="i + 1 < projects.length">
+            <ng-template ngFor let-project [ngForOf]="projects">
+                <div class="item">
                     <div class="image-box">
-                        <img *ngIf="hasLink(projects[i])" class="image" src={{projects[i].image}} (click)="navigate(projects[i])" title="Visit Demo Page">
-                        <img *ngIf="!hasLink(projects[i])" class="image--nolink" src={{projects[i].image}}>
+                        <img *ngIf="hasLink(project)" class="image" src={{project.image}} (click)="navigate(project)" title="Visit Demo Page">
+                        <img *ngIf="!hasLink(project)" class="image--nolink" src={{project.image}}>
                     </div>
                     <div class="description">
-                        <h4>{{projects[i].title}}</h4>
-                        <p style="font-size: 14px;">{{projects[i].description}}</p>
-                        <button class="btn btn-dark" *ngIf="projects[i].codeLink != ''" (click)="openCodeLink(projects[i])">Code</button>
-
-                        <div *ngIf="projects[i].codeLink == ''" style="font-size: 14px;">Professional code is private.</div>
+                        <h4 style="display: inline-block;">{{project.title}}</h4>
+                        <span [innerHTML]="project.html"></span>
+                        <p style="font-size: 14px;">{{project.description}}</p>
+                        <i *ngIf="project.demoLink != ''" class="fas fa-play-circle" (click)="openDemoLink(project)" title="Demo"></i>
+                        <i *ngIf="project.codeLink != ''" class="fab fa-github" (click)="openCodeLink(project)" title="Code"></i>
+                        <i *ngIf="project.codeLink == ''" class="fab fa-github--disabled fa-github" title="Professional code is private"></i>
                     </div>
                 </div>
             </ng-template>
         </div>
     </div>
-    <!-- <div class="project row">
-        <div class="image-box col-md-5 col-lg-4">
-            <img class="image" src="assets\rugged_coastline_crop.jpg">
-        </div>
-        <div class="description col-md-7 col-lg-6">
-            <h4>Sorting</h4>
-            <p>Text</p>
-        </div>
-    </div> -->
 </div>

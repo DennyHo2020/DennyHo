@@ -4,5 +4,6 @@ export type ProjectModel = {
     description: string;
     codeLink: string;
     demoLink: string;
+    html: string;
     isExternalDemo: boolean;
 }
